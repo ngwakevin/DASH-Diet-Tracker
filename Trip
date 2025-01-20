@@ -1,0 +1,141 @@
+import datetime
+
+# Define the DASH diet plan as a dictionary
+dash_diet_plan = {
+    "Day 1": {
+        "Breakfast": "1 cup oatmeal with berries and walnuts, 1 cup low-fat milk",
+        "Snack": "1 medium apple, 1 tbsp almond butter",
+        "Lunch": "Grilled chicken breast, quinoa salad, steamed broccoli",
+        "Snack": "Low-fat yogurt with nuts",
+        "Dinner": "Grilled salmon, roasted sweet potatoes, steamed green beans"
+    },
+    "Day 2": {
+        "Breakfast": "Whole-grain toast with avocado, 1 boiled egg, 1 orange",
+        "Snack": "Small handful of almonds, herbal tea",
+        "Lunch": "Lentil soup, whole-grain roll, side salad",
+        "Snack": "Baby carrots with hummus",
+        "Dinner": "Turkey burger on whole-grain bun, salad, baked potato"
+    },
+    "Day 3": {
+        "Breakfast": "Smoothie: spinach, banana, almond milk, chia seeds",
+        "Snack": "1 pear, sunflower seeds",
+        "Lunch": "Chicken wrap in whole-grain tortilla, vegetable soup",
+        "Snack": "Low-fat string cheese, whole-grain crackers",
+        "Dinner": "Baked cod, brown rice, sautéed spinach with garlic"
+    },
+    "Day 4": {
+        "Breakfast": "Greek yogurt parfait with berries and granola",
+        "Snack": "Sliced cucumber, pistachios",
+        "Lunch": "Whole-grain pasta, marinara sauce, steamed zucchini",
+        "Snack": "1 banana",
+        "Dinner": "Chicken stir-fry with vegetables, brown rice"
+    },
+    "Day 5": {
+        "Breakfast": "Scrambled eggs with spinach and tomatoes, whole-grain toast, orange",
+        "Snack": "Small handful of walnuts, herbal tea",
+        "Lunch": "Shrimp salad with greens, avocado, cherry tomatoes, balsamic dressing, whole-grain roll",
+        "Snack": "Low-fat cottage cheese with sliced peaches",
+        "Dinner": "Baked chicken breast, steamed asparagus, mashed cauliflower"
+    },
+    "Day 6": {
+        "Breakfast": "Whole-grain English muffin with peanut butter and banana slices, low-fat milk",
+        "Snack": "1 apple",
+        "Lunch": "Tuna salad on greens, whole-grain bread",
+        "Snack": "Baby carrots with hummus",
+        "Dinner": "Grilled salmon, quinoa, roasted Brussels sprouts"
+    },
+    "Day 7": {
+        "Breakfast": "Whole-grain cereal with low-fat milk, fresh berries, boiled egg",
+        "Snack": "Small handful of mixed nuts, green tea",
+        "Lunch": "Grilled chicken breast, roasted vegetables, brown rice",
+        "Snack": "Low-fat yogurt with honey and flaxseeds",
+        "Dinner": "Baked trout, steamed green beans, baked sweet potato"
+    }
+}
+
+# Initialize a tracking dictionary
+tracking = {}
+for day in dash_diet_plan:
+    tracking[day] = {
+        "Breakfast": False,
+        "Snack": False,
+        "Lunch": False,
+        "Dinner": False,
+        "Notes": ""
+    }
+
+# Function to list food for the day
+def list_food(day):
+    if day in dash_diet_plan:
+        print(f"\n{day} Food Plan:")
+        for meal, description in dash_diet_plan[day].items():
+            print(f"- {meal}: {description}")
+    else:
+        print("Invalid day.")
+
+# Function to log meals
+def log_meal(day, meal):
+    if day in tracking and meal in tracking[day]:
+        tracking[day][meal] = True
+        print(f"{meal} logged for {day}.")
+    else:
+        print("Invalid day or meal.")
+
+# Function to add notes
+def add_notes(day, note):
+    if day in tracking:
+        tracking[day]["Notes"] = note
+        print(f"Notes added for {day}.")
+    else:
+        print("Invalid day.")
+
+# Function to view the daily plan and progress
+def view_day(day):
+    if day in dash_diet_plan:
+        print(f"\n{day} Plan:")
+        for meal, description in dash_diet_plan[day].items():
+            print(f"{meal}: {description}")
+        print("\nProgress:")
+        for meal, completed in tracking[day].items():
+            if meal != "Notes":
+                status = "Completed" if completed else "Pending"
+                print(f"{meal}: {status}")
+        print(f"Notes: {tracking[day]['Notes']}")
+    else:
+        print("Invalid day.")
+
+# Example usage
+def main():
+    print("Welcome to the DASH Diet Tracker!")
+    while True:
+        print("\nOptions:")
+        print("1. View daily plan")
+        print("2. Log a meal")
+        print("3. Add notes")
+        print("4. List food for the day")
+        print("5. Exit")
+
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            day = input("Enter the day (e.g., Day 1): ")
+            view_day(day)
+        elif choice == "2":
+            day = input("Enter the day (e.g., Day 1): ")
+            meal = input("Enter the meal (e.g., Breakfast, Snack, Lunch, Dinner): ")
+            log_meal(day, meal)
+        elif choice == "3":
+            day = input("Enter the day (e.g., Day 1): ")
+            note = input("Enter your notes: ")
+            add_notes(day, note)
+        elif choice == "4":
+            day = input("Enter the day (e.g., Day 1): ")
+            list_food(day)
+        elif choice == "5":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
